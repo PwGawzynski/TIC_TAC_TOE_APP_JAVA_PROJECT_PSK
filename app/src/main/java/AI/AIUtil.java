@@ -33,10 +33,10 @@ public class AIUtil
         else if(bestMove.row == 1) return bestMove.row + bestMove.col + 2;
         else  return bestMove.row + bestMove.col + 4;
     }
-    // This function returns true if there are moves
-// remaining on the board. It returns false if
-// there are no moves left to play.
-    static Boolean isMovesLeft(char board[][])
+    //sprawdza czy sa dostępne ruchy
+    // jeżeli sa ruchy zwraca prawde
+    // jeżeli nie ma żadnej możliwości ruchu zwraca fałsz
+    public static Boolean isMovesLeft(char board[][])
     {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
@@ -45,11 +45,9 @@ public class AIUtil
         return false;
     }
 
-    // This is the evaluation function as discussed
-// in the previous article ( http://goo.gl/sJgv68 )
+    // Funkcja odpowiadająca za obliczenie wag poszczególnych propozycji ruchów
     static int evaluate(char b[][])
     {
-        // Checking for Rows for X or O victory.
         for (int row = 0; row < 3; row++)
         {
             if (b[row][0] == b[row][1] &&
@@ -61,8 +59,6 @@ public class AIUtil
                     return -10;
             }
         }
-
-        // Checking for Columns for X or O victory.
         for (int col = 0; col < 3; col++)
         {
             if (b[0][col] == b[1][col] &&
@@ -76,7 +72,6 @@ public class AIUtil
             }
         }
 
-        // Checking for Diagonals for X or O victory.
         if (b[0][0] == b[1][1] && b[1][1] == b[2][2])
         {
             if (b[0][0] == player)
@@ -93,55 +88,40 @@ public class AIUtil
                 return -10;
         }
 
-        // Else if none of them have won then return 0
         return 0;
     }
 
-    // This is the minimax function. It considers all
-// the possible ways the game can go and returns
-// the value of the board
+    // Funkcja minmax znana z algolytmu minmax czyli algorytmu AI Computer_Player
+    // zwraca najlepszy ruch
     static int minimax(char board[][],
                        int depth, Boolean isMax)
     {
         int score = evaluate(board);
 
-        // If Maximizer has won the game
-        // return his/her evaluated score
         if (score == 10)
             return score;
 
-        // If Minimizer has won the game
-        // return his/her evaluated score
         if (score == -10)
             return score;
 
-        // If there are no more moves and
-        // no winner then it is a tie
         if (isMovesLeft(board) == false)
             return 0;
 
-        // If this maximizer's move
         if (isMax)
         {
             int best = -1000;
 
-            // Traverse all cells
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    // Check if cell is empty
                     if (board[i][j]=='_')
                     {
-                        // Make the move
                         board[i][j] = player;
 
-                        // Call minimax recursively and choose
-                        // the maximum value
                         best = Math.max(best, minimax(board,
                                 depth + 1, !isMax));
 
-                        // Undo the move
                         board[i][j] = '_';
                     }
                 }
@@ -149,28 +129,21 @@ public class AIUtil
             return best;
         }
 
-        // If this minimizer's move
         else
         {
             int best = 1000;
 
-            // Traverse all cells
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    // Check if cell is empty
                     if (board[i][j] == '_')
                     {
-                        // Make the move
                         board[i][j] = opponent;
 
-                        // Call minimax recursively and choose
-                        // the minimum value
                         best = Math.min(best, minimax(board,
                                 depth + 1, !isMax));
 
-                        // Undo the move
                         board[i][j] = '_';
                     }
                 }
@@ -178,9 +151,7 @@ public class AIUtil
             return best;
         }
     }
-
-    // This will return the best possible
-// move for the player
+    // znajduje najlepszy ruch i zwraca go do głownego Drivera jako obiekt klasy move
     static Move findBestMove(char board[][])
     {
         int bestVal = -1000;
@@ -188,29 +159,18 @@ public class AIUtil
         bestMove.row = -1;
         bestMove.col = -1;
 
-        // Traverse all cells, evaluate minimax function
-        // for all empty cells. And return the cell
-        // with optimal value.
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                // Check if cell is empty
                 if (board[i][j] == '_')
                 {
-                    // Make the move
                     board[i][j] = player;
 
-                    // compute evaluation function for this
-                    // move.
                     int moveVal = minimax(board, 0, false);
 
-                    // Undo the move
                     board[i][j] = '_';
 
-                    // If the value of the current move is
-                    // more than the best value, then update
-                    // best/
                     if (moveVal > bestVal)
                     {
                         bestMove.row = i;
@@ -223,19 +183,4 @@ public class AIUtil
 
         return bestMove;
     }
-
-    /*// Driver code
-    public static void main(String[] args)
-    {
-        char board[][] = {{ 'x', 'o', 'x' },
-                { 'o', 'o', 'x' },
-                { '_', '_', '_' }};
-
-        Move bestMove = findBestMove(board);
-
-        System.out.printf("The Optimal Move is :\n");
-        System.out.printf("ROW: %d COL: %d\n\n",
-                bestMove.row, bestMove.col );
-    }*/
-
 }
