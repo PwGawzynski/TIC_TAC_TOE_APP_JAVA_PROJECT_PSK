@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
-
+/**
+ * Klasa która implememtuje Loading screen z logiem oraz twórcami
+ * **/
 public class Loader extends AppCompatActivity {
 
     @Override

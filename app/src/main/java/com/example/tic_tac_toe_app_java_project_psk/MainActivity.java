@@ -15,9 +15,23 @@ import android.widget.Toast;
 import java.util.concurrent.TimeUnit;
 
 import AI.AIUtil;
-
+/** Klasa Bazowa całej gry, opiera się na niej cały mechanizm rozgrywki
+ * możliwości postawienia ruchu i reagowania na kliknięcie,
+ * sprawdzenia wygranej oraz liczenia punktów
+ * Klasa dziedziczy klasę oraz używa interfejsu z biblioteki Androida potrzebne
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
+    /** Implementacja potrzebnych obiektów do rozgrywki
+     * @param playerStatus text informujący gracza dotyczacy rozgrywki
+     * @param playerTwoScore text informujący gracza 2 o ilości puntków
+     * @param playerOneScore  text informujący gracza 1 o ilości punktów
+     * @param buttons przyciski rozgrywki
+     * @param playerOneScoreCount zebrane punkty gracza 1
+     * @param platerTwoScoreCount zebrane punkty gracza 2
+     * @param resetGame przycisk resetowania gra
+     * @param roundCount licznik rund
+     * @param activePlayer aktywny gracz
+     */
     private TextView playerOneScore, playerTwoScore, playerStatus;
     private Button[] buttons = new Button[9];
     private Button resetGame;
@@ -29,6 +43,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //p1 => 0
     //p2 => 1
     // empty => 2
+    /** Implementacja potrzebnych tablic, macierz z informacjami potrzemnymi do rozgrywki
+     * @param gameState tablica z informacją czy w danym polu ma być O czy X początkowo jest 2 czyli pustka
+     * @param winningPositions macierz z możliwymi opcjami wygranych
+     */
     int [] gameState = {2,2,2,2,2,2,2,2,2};
 
     int [][] winningPositions = {
@@ -36,7 +54,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {0,3,6}, {1,4,7}, {2,5,8}, //columns
             {0,4,8}, {2,4,6} //cross
     };
-
+    /** Tworzy planszę rozgrywki
+     * wykorzystuje elementu z biblioteki android
+     * wyświetla informacje takie jak nazwa gracza ilość punktów 9 przycisków oraz przycisk restartu
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +83,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         handler = new Handler();
         toggle = false;
     }
-
+    /** Metoda rozgrywki wpisuje X i O w zależności od activePlayer
+     * za każdym razem sprawdza czy doszło do wygranej
+     * jeżeli ktoś wygrał przypisuje danemu graczowi punkt
+     * sprawia że przycisk Reset Game jest użyteczny i resetuje rozgrywkę
+     */
     @Override
     public void onClick(View v) {
         if(toggle){
@@ -177,7 +202,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-
+    /** Metoda sprawdza na podstawie winning position czy doszło do wygranej
+     * @return zwraca true lub false w zależności od tego czy obecna kombinacja zgadza się z kombinacją z winningPosition
+     */
     public boolean checkWinner() {
         boolean winnerResult = false;
         for (int[] winningPosition : winningPositions) {
@@ -189,12 +216,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return winnerResult;
     }
-
+    /** Zmienia wyświetlaną ilość punktów
+     * zmienia z wartości całkowitej na ciąg znaków i ustawia text
+     */
         public void updatePlayerScore(){
             playerOneScore.setText(Integer.toString(playerOneScoreCount));
             playerTwoScore.setText(Integer.toString(playerTwoScoreCount));
         }
-
+    /** Metoda umożliwa zagranie ponownie w gre
+     * resetuje punkty oraz czyści plansze
+     */
         public void playAgain(){
             roundCount = 0;
             activePlayer = true;

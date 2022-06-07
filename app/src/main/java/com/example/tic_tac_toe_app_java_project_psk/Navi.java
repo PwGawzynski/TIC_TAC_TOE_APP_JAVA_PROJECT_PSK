@@ -9,7 +9,9 @@ import android.view.Window;
 import android.widget.Button;
 
 import AI.AIUtil;
-
+/**
+ * Klasa zawwierająca przyciski i wykonująca kcje nawigacji
+ * **/
 public class Navi extends AppCompatActivity  {
     private Button playPvP, playWAi;
     @Override
@@ -18,7 +20,9 @@ public class Navi extends AppCompatActivity  {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_navi2);
-
+        /**
+         * @param playPvP przycisk służacy do wyboru rozgrywki jeden nan jeden
+         * **/
         playPvP = (Button) findViewById(R.id.play1x1);
         playPvP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +30,9 @@ public class Navi extends AppCompatActivity  {
                 startActivity(new Intent(Navi.this, MainActPvP.class));
             }
         });
+        /**
+         * @param playWAi przycisk służacy do wyboru rozgrywki z komputerem jako przeciwnikiem
+         * **/
         playWAi = (Button) findViewById(R.id.playWithComputer);
         playWAi.setOnClickListener(new View.OnClickListener() {
             @Override
