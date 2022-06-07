@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".MainActivity">
+    tools:context=".MainActPvP">
 
     <TextView
         android:id="@+id/playerOne"
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
-        android:text="Computer AI"
+        android:text="Player Two"
         android:layout_marginTop="32dp"
         android:textSize="20sp"
         app:layout_constraintRight_toRightOf="parent"

@@ -10,7 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TIC_TAC_TOE_APP_JAVA_PROJECT_PSK">
         <activity
+            android:name=".MainActPvP"
+            android:exported="false" />
+        <activity
+            android:name=".Navi"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Loader"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
