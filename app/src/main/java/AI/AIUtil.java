@@ -1,17 +1,30 @@
 package AI;
 
-// Java program to find the
-// next optimal move for a player
+/**
+ * Klasa implementująca AI do trybu multiplayer
+ * **/
 public class AIUtil
 {
+
     static class Move
     {
+        /**
+         * @param row nr wiersza będący najlepszym wyborem
+         * @param col nr kolumny będącej najlepszym wyborem
+         * **/
+
         int row, col;
     };
-
+    /**
+     * @param player oznacza dla kogo szukamy najlepszego ruchu czy dla X czy o
+     * @param opponent oznacza znak przeciwnika
+     * **/
     static char player = 'o', opponent = 'x';
 
-
+    /***
+     * Przetwarza orginalna tablice na jej reprezentację a następnie wykonuje algorytm Obliczania najlepszego ruchu
+     * @param gameState tablica reprezentująca aktualny stan gry
+     * */
     static public int process(int [] gameState){
         int position;
         char board[][] = {{ '_', '_', '_' },//00 01 02
@@ -33,9 +46,11 @@ public class AIUtil
         else if(bestMove.row == 1) return bestMove.row + bestMove.col + 2;
         else  return bestMove.row + bestMove.col + 4;
     }
-    //sprawdza czy sa dostępne ruchy
-    // jeżeli sa ruchy zwraca prawde
-    // jeżeli nie ma żadnej możliwości ruchu zwraca fałsz
+   /**
+    * sprawdza czy sa dostępne ruchy
+    * jeżeli sa ruchy zwraca prawde
+    * jeżeli nie ma żadnej możliwości ruchu zwraca fałsz
+    * */
     public static Boolean isMovesLeft(char board[][])
     {
         for (int i = 0; i < 3; i++)
@@ -45,7 +60,9 @@ public class AIUtil
         return false;
     }
 
-    // Funkcja odpowiadająca za obliczenie wag poszczególnych propozycji ruchów
+    /**
+     *  Funkcja odpowiadająca za obliczenie wag poszczególnych propozycji ruchów
+     * **/
     static int evaluate(char b[][])
     {
         for (int row = 0; row < 3; row++)
@@ -91,8 +108,10 @@ public class AIUtil
         return 0;
     }
 
-    // Funkcja minmax znana z algolytmu minmax czyli algorytmu AI Computer_Player
-    // zwraca najlepszy ruch
+   /**
+    *  Funkcja minmax znana z algolytmu minmax czyli algorytmu AI Computer_Player
+    *  zwraca najlepszy ruch
+    * **/
     static int minimax(char board[][],
                        int depth, Boolean isMax)
     {
@@ -151,7 +170,9 @@ public class AIUtil
             return best;
         }
     }
-    // znajduje najlepszy ruch i zwraca go do głownego Drivera jako obiekt klasy move
+    /**
+     * znajduje najlepszy ruch i zwraca go do głownego Drivera jako obiekt klasy move
+     * **/
     static Move findBestMove(char board[][])
     {
         int bestVal = -1000;
