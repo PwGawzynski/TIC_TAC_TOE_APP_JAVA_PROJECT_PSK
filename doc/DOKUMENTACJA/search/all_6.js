@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['onclick_7',['onClick',['../classcom_1_1example_1_1tic__tac__toe__app__java__project__psk_1_1_main_activity.html#a4669da7c3dba5f94c87aaac15f9d838e',1,'com.example.tic_tac_toe_app_java_project_psk.MainActivity.onClick()'],['../classcom_1_1example_1_1tic__tac__toe__app__java__project__psk_1_1_main_act_pv_p.html#a1be889e65f3095ae8776334fe401969a',1,'com.example.tic_tac_toe_app_java_project_psk.MainActPvP.onClick()']]],
+  ['oncreate_8',['onCreate',['../classcom_1_1example_1_1tic__tac__toe__app__java__project__psk_1_1_main_activity.html#afebfb2fb93bce0ca72d053a8dca3cfae',1,'com.example.tic_tac_toe_app_java_project_psk.MainActivity.onCreate()'],['../classcom_1_1example_1_1tic__tac__toe__app__java__project__psk_1_1_main_act_pv_p.html#ae1356ee70187959553d30cff52065ed3',1,'com.example.tic_tac_toe_app_java_project_psk.MainActPvP.onCreate()'],['../classcom_1_1example_1_1tic__tac__toe__app__java__project__psk_1_1_navi.html#ac96ec54e575a23e68f798b4134fb08c5',1,'com.example.tic_tac_toe_app_java_project_psk.Navi.onCreate()']]]
+];
